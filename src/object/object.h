@@ -16,6 +16,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef _OBJECT_H_
+#define _OBJECT_H_
+
 #include "../general.h"
 
 // =============================================================================
@@ -23,16 +26,22 @@
 namespace LinphonePrivate {
   class Object;
 
-  struct ObjectPrivate {
+  class ObjectPrivate {
+  public:
     ObjectPrivate () = default;
     virtual ~ObjectPrivate () = default;
 
+  private:
     Object *mPublic = nullptr;
+
+    L_DECLARE_PUBLIC(Object);
   };
 
   class Object {
   public:
-    virtual ~Object () = default;
+    virtual ~Object () {
+      delete mPrivate;
+    }
 
   protected:
     explicit Object (ObjectPrivate *objectPrivate) : mPrivate(objectPrivate) {
@@ -42,6 +51,9 @@ namespace LinphonePrivate {
     ObjectPrivate *mPrivate = nullptr;
 
   private:
+    L_DECLARE_PRIVATE(Object);
     L_DISABLE_COPY(Object);
   };
 }
+
+#endif // ifndef _OBJECT_H_

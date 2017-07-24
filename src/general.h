@@ -21,8 +21,29 @@
 #ifndef _GENERAL_H_
 #define _GENERAL_H_
 
+#define L_DECLARE_PRIVATE(CLASS) \
+  inline CLASS ## Private * getPrivate() { \
+    return reinterpret_cast<CLASS ## Private *>(mPrivate); \
+  } \
+  inline const CLASS ## Private *getPrivate() const { \
+    return reinterpret_cast<const CLASS ## Private *>(mPrivate); \
+  } \
+  friend class CLASS ## Private;
+
+#define L_DECLARE_PUBLIC(CLASS) \
+  inline CLASS * getPublic() { \
+    return static_cast<CLASS *>(mPublic); \
+  } \
+  inline const CLASS *getPublic() const { \
+    return static_cast<const CLASS *>(mPublic); \
+  } \
+  friend class CLASS;
+
 #define L_DISABLE_COPY(CLASS) \
   CLASS(const CLASS &) = delete; \
   CLASS &operator= (const CLASS &) = delete;
+
+#define L_PRIVATE_P(CLASS) CLASS ## Private * const p = getPrivate();
+#define L_PUBLIC_P(CLASS) CLASS * const p = getPublic();
 
 #endif // ifndef _GENERAL_H_

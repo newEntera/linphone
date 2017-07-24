@@ -31,6 +31,9 @@ namespace LinphonePrivate {
     public:
       Parser ();
       ~Parser ();
+
+    private:
+      L_DECLARE_PRIVATE(Parser);
     };
   }
 }
