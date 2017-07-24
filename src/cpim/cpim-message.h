@@ -37,7 +37,11 @@ namespace LinphonePrivate {
       Header ();
       ~Header () = default;
 
-      bool setHeader (const std::string &name, const std::string &value);
+      std::string getName () const;
+      bool setName (const std::string &name);
+
+      std::string getValue () const;
+      bool setValue (const std::string &value);
 
     private:
       L_DECLARE_PRIVATE(Header);
