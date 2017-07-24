@@ -34,7 +34,7 @@ namespace LinphonePrivate {
 
     class Header : public Object {
     public:
-      Header (const std::string &name, const std::string &value);
+      Header ();
       ~Header () = default;
 
       bool setHeader (const std::string &name, const std::string &value);
@@ -48,7 +48,14 @@ namespace LinphonePrivate {
       Message ();
       ~Message () = default;
 
-      std::shared_ptr<std::list<MessageHeader> > getMessageHeaders () const;
+      std::shared_ptr<std::list<Header> > getMimeHeaders () const;
+      bool setMimeHeaders (const std::shared_ptr<std::list<Header> > &mimeHeaders);
+
+      std::shared_ptr<std::list<Header> > getMessageHeaders () const;
+      bool setMessageHeaders (const std::shared_ptr<std::list<Header> > &messageHeaders);
+
+      std::string getContent () const;
+      bool setContent (const std::string &content);
 
     private:
       L_DECLARE_PRIVATE(Message);
