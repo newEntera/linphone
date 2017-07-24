@@ -33,7 +33,3 @@ public:
 };
 
 Cpim::Parser::Parser () : Object(new ParserPrivate) {}
-
-Cpim::Parser::~Parser () {
-  // TODO.
-}

@@ -1,5 +1,5 @@
 /*
- * cpim-parser.h
+ * cpim-message.h
  * Copyright (C) 2017  Belledonne Communications SARL
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CPIM_PARSER_H_
-#define _CPIM_PARSER_H_
+#ifndef _CPIM_MESSAGE_H_
+#define _CPIM_MESSAGE_H_
+
+#include <list>
+#include <string>
+#include <memory>
 
 #include "../object/object.h"
 
@@ -25,17 +29,31 @@
 
 namespace LinphonePrivate {
   namespace Cpim {
-    class ParserPrivate;
+    class HeaderPrivate;
+    class MessagePrivate;
 
-    class Parser : public Object {
+    class Header : public Object {
     public:
-      Parser ();
-      ~Parser () = default;
+      Header (const std::string &name, const std::string &value);
+      ~Header () = default;
+
+      bool setHeader (const std::string &name, const std::string &value);
 
     private:
-      L_DECLARE_PRIVATE(Parser);
+      L_DECLARE_PRIVATE(Header);
+    };
+
+    class Message : public Object {
+    public:
+      Message ();
+      ~Message () = default;
+
+      std::shared_ptr<std::list<MessageHeader> > getMessageHeaders () const;
+
+    private:
+      L_DECLARE_PRIVATE(Message);
     };
   }
 }
 
-#endif // ifndef _CPIM_PARSER_H_
+#endif // ifndef _CPIM_MESSAGE_H_
