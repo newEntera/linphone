@@ -31,9 +31,10 @@ namespace LinphonePrivate {
     ObjectPrivate () = default;
     virtual ~ObjectPrivate () = default;
 
-  private:
+  protected:
     Object *mPublic = nullptr;
 
+  private:
     L_DECLARE_PUBLIC(Object);
   };
 
