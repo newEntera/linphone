@@ -18,7 +18,6 @@
 
 #include <belr/parser-impl.cc>
 
-#include "../object/singleton.h"
 #include "cpim-grammar.h"
 
 #include "cpim-parser.h"
@@ -27,15 +26,10 @@ using namespace Linphone;
 
 // =============================================================================
 
-class Toto : public Singleton<Cpim::Parser> {};
-
 class Cpim::ParserPrivate : public ObjectPrivate {
 public:
   ParserPrivate () = default;
   ~ParserPrivate () = default;
 };
 
-Cpim::Parser::Parser () : Object(new ParserPrivate) {
-  Toto a;
-  a.getInstance();
-}
+Cpim::Parser::Parser () : Object(new ParserPrivate) {}

@@ -63,11 +63,6 @@ const char *LinphonePrivate::Cpim::getGrammar () {
 
       TOKENCHAR = NAMECHAR / "." / UCS-high
 
-      SEPARATORS = "(" / ")" / "<" / ">" / "@"
-        / "," / ";" / ":" / "\" / DQUOTE
-        / "/" / "[" / "]" / "?" / "="
-        / "{" / "}" / SP
-
       UCS-no-CTL = UTF8-no-CTL
       UCS-high = UTF8-multi
       UTF8-no-CTL = %x20-7e / UTF8-multi

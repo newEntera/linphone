@@ -27,25 +27,70 @@
 
 // =============================================================================
 
+#define MAKE_CORE_HEADER(CLASS, NAME) \
+  class CLASS ## Header : public CoreHeader { \
+  public: \
+    inline std::string getName() const override { \
+      return NAME; \
+    } \
+    std::string getValue() const override; \
+    bool setValue(const std::string &value) override; \
+  };
+
 namespace Linphone {
   namespace Cpim {
-    class HeaderPrivate;
+    class CoreHeaderPrivate;
+    class GenericHeaderPrivate;
     class MessagePrivate;
+
+    // -------------------------------------------------------------------------
+    // Headers.
+    // -------------------------------------------------------------------------
 
     class Header : public Object {
     public:
-      Header ();
-      ~Header ();
+      Header () = default;
+      virtual ~Header () = default;
 
-      std::string getName () const;
-      bool setName (const std::string &name);
+      virtual std::string getName () const = 0;
+      virtual std::string getValue () const = 0;
+      virtual bool setValue (const std::string &value) = 0;
+    };
 
-      std::string getValue () const;
-      bool setValue (const std::string &value);
+    class CoreHeader : public Header {
+    public:
+      CoreHeader () = default;
+      virtual ~CoreHeader () = default;
 
     private:
-      L_DECLARE_PRIVATE(Header);
+      L_DECLARE_PRIVATE(CoreHeader);
     };
+
+    MAKE_CORE_HEADER(From, "From");
+    MAKE_CORE_HEADER(To, "To");
+    MAKE_CORE_HEADER(Cc, "cc");
+    MAKE_CORE_HEADER(DateTime, "DateTime");
+    MAKE_CORE_HEADER(Subject, "Subject");
+    MAKE_CORE_HEADER(Ns, "NS");
+    MAKE_CORE_HEADER(Require, "Require");
+
+    class GenericHeader : public Header {
+    public:
+      GenericHeader () = default;
+      ~GenericHeader () = default;
+
+      std::string getName () const override;
+      std::string setName ();
+      std::string getValue () const override;
+      bool setValue (const std::string &value) override;
+
+    private:
+      L_DECLARE_PRIVATE(GenericHeader);
+    };
+
+    // -------------------------------------------------------------------------
+    // Message.
+    // -------------------------------------------------------------------------
 
     class Message : public Object {
     public:
@@ -66,5 +111,7 @@ namespace Linphone {
     };
   }
 }
+
+#undef MAKE_HEADER
 
 #endif // ifndef _CPIM_MESSAGE_H_

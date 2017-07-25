@@ -20,6 +20,7 @@
 #define _CPIM_PARSER_H_
 
 #include "../object/object.h"
+#include "../object/singleton.h"
 
 // =============================================================================
 
@@ -27,12 +28,15 @@ namespace Linphone {
   namespace Cpim {
     class ParserPrivate;
 
-    class Parser : public Object {
+    class Parser :
+      public Object,
+      public Singleton<Parser> {
     public:
-      Parser ();
       ~Parser () = default;
 
     private:
+      Parser ();
+
       L_DECLARE_PRIVATE(Parser);
     };
   }
