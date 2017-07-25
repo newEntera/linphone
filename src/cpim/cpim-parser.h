@@ -23,7 +23,7 @@
 
 // =============================================================================
 
-namespace LinphonePrivate {
+namespace Linphone {
   namespace Cpim {
     class ParserPrivate;
 

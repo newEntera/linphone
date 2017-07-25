@@ -1,5 +1,5 @@
 /*
- * object.h
+ * singleton.h
  * Copyright (C) 2017  Belledonne Communications SARL
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,45 +16,34 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _OBJECT_H_
-#define _OBJECT_H_
+#ifndef _SINGLETON_H_
+#define _SINGLETON_H_
 
 #include "../utils/general.h"
 
 // =============================================================================
 
 namespace Linphone {
-  class Object;
-
-  class ObjectPrivate {
+  template<class T>
+  class Singleton {
   public:
-    ObjectPrivate () = default;
-    virtual ~ObjectPrivate () = default;
+    Singleton () = default;
+    ~Singleton () = default;
 
-  protected:
-    Object *mPublic = nullptr;
-
-  private:
-    L_DECLARE_PUBLIC(Object);
-  };
-
-  class Object {
-  public:
-    virtual ~Object () {
-      delete mPrivate;
+    static T *getInstance () {
+      if (!mInstance)
+        mInstance = new T();
+      return mInstance;
     }
 
-  protected:
-    explicit Object (ObjectPrivate *objectPrivate) : mPrivate(objectPrivate) {
-      mPrivate->mPublic = this;
-    }
-
-    ObjectPrivate *mPrivate = nullptr;
-
   private:
-    L_DECLARE_PRIVATE(Object);
-    L_DISABLE_COPY(Object);
+    static T *mInstance;
+
+    L_DISABLE_COPY(Singleton);
   };
+
+  template<class T>
+  T * Singleton<T>::mInstance = nullptr;
 }
 
-#endif // ifndef _OBJECT_H_
+#endif // ifndef _SINGLETON_H_

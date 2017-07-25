@@ -43,7 +43,7 @@
   CLASS(const CLASS &) = delete; \
   CLASS &operator= (const CLASS &) = delete;
 
-#define L_PRIVATE(CLASS) CLASS ## Private * const p = getPrivate();
-#define L_PUBLIC(CLASS) CLASS * const p = getPublic();
+#define L_PRIV(CLASS) CLASS ## Private * const _ = getPrivate();
+#define L_PUBL(CLASS) CLASS * const _ = getPublic();
 
 #endif // ifndef _GENERAL_H_
