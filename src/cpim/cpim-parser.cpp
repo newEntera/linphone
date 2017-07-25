@@ -40,4 +40,6 @@ Cpim::Parser::Parser () : Singleton(new ParserPrivate) {
       LinphonePrivate::Cpim::getGrammar(),
       make_shared<belr::CoreRules>()
     );
+
+  getInstance();
 }

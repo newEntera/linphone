@@ -34,18 +34,18 @@ namespace Linphone {
     }
 
   protected:
-    explicit Singleton (ObjectPrivate *objectPrivate) : Object(objectPrivate) {}
+    explicit Singleton (ObjectPrivate *objectPrivate = nullptr) : Object(objectPrivate) {}
 
     virtual ~Singleton () = default;
 
   private:
-    static T *mInstance;
+    static Singleton<T> *mInstance;
 
     L_DISABLE_COPY(Singleton);
   };
 
   template<class T>
-  T * Singleton<T>::mInstance = nullptr;
+  Singleton<T> *Singleton<T>::mInstance = nullptr;
 }
 
 #endif // ifndef _SINGLETON_H_

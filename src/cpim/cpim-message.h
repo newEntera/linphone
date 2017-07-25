@@ -35,6 +35,8 @@
     } \
     std::string getValue() const override; \
     bool setValue(const std::string &value) override; \
+  private: \
+    L_DISABLE_COPY(CLASS ## Header); \
   };
 
 namespace Linphone {
@@ -54,6 +56,9 @@ namespace Linphone {
       virtual std::string getName () const = 0;
       virtual std::string getValue () const = 0;
       virtual bool setValue (const std::string &value) = 0;
+
+    private:
+      L_DISABLE_COPY(Header);
     };
 
     class CoreHeader : public Header {
@@ -62,6 +67,7 @@ namespace Linphone {
 
     private:
       L_DECLARE_PRIVATE(CoreHeader);
+      L_DISABLE_COPY(CoreHeader);
     };
 
     MAKE_CORE_HEADER(From, "From");
@@ -81,6 +87,7 @@ namespace Linphone {
 
     private:
       L_DECLARE_PRIVATE(GenericHeader);
+      L_DISABLE_COPY(GenericHeader);
     };
 
     // -------------------------------------------------------------------------
@@ -102,6 +109,7 @@ namespace Linphone {
 
     private:
       L_DECLARE_PRIVATE(Message);
+      L_DISABLE_COPY(Message);
     };
   }
 }

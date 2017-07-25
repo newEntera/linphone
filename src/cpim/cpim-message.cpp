@@ -42,18 +42,24 @@ shared_ptr<const list<Cpim::Header> > Cpim::Message::getMimeHeaders () const {
   return _->mimeHeaders;
 }
 
-bool Cpim::Message::setMimeHeaders (const shared_ptr<list<Header> > &mimeHeaders) {}
+bool Cpim::Message::setMimeHeaders (const shared_ptr<list<Header> > &mimeHeaders) {
+  return false;
+}
 
 shared_ptr<const list<Cpim::Header> > Cpim::Message::getMessageHeaders () const {
   L_PRIV(const Message);
   return _->messageHeaders;
 }
 
-bool Cpim::Message::setMessageHeaders (const shared_ptr<list<Header> > &messageHeaders) {}
+bool Cpim::Message::setMessageHeaders (const shared_ptr<list<Header> > &messageHeaders) {
+  return false;
+}
 
 string Cpim::Message::getContent () const {
   L_PRIV(const Message);
   return _->content;
 }
 
-bool Cpim::Message::setContent (const string &content) {}
+bool Cpim::Message::setContent (const string &content) {
+  return false;
+}
