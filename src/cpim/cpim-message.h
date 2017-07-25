@@ -49,8 +49,7 @@ namespace Linphone {
 
     class Header : public Object {
     public:
-      Header () = default;
-      virtual ~Header () = default;
+      virtual ~Header () = 0;
 
       virtual std::string getName () const = 0;
       virtual std::string getValue () const = 0;
@@ -59,8 +58,7 @@ namespace Linphone {
 
     class CoreHeader : public Header {
     public:
-      CoreHeader () = default;
-      virtual ~CoreHeader () = default;
+      virtual ~CoreHeader () = 0;
 
     private:
       L_DECLARE_PRIVATE(CoreHeader);
@@ -76,9 +74,6 @@ namespace Linphone {
 
     class GenericHeader : public Header {
     public:
-      GenericHeader () = default;
-      ~GenericHeader () = default;
-
       std::string getName () const override;
       std::string setName ();
       std::string getValue () const override;
@@ -95,7 +90,6 @@ namespace Linphone {
     class Message : public Object {
     public:
       Message ();
-      ~Message () = default;
 
       std::shared_ptr<const std::list<Header> > getMimeHeaders () const;
       bool setMimeHeaders (const std::shared_ptr<std::list<Header> > &mimeHeaders);

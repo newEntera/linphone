@@ -18,6 +18,8 @@
 
 #include "cpim-message.h"
 
+using namespace std;
+
 using namespace Linphone;
 
 // =============================================================================
@@ -28,33 +30,30 @@ using namespace Linphone;
 
 class Cpim::MessagePrivate : public ObjectPrivate {
 public:
-  MessagePrivate () = default;
-  ~MessagePrivate () = default;
-
-  std::shared_ptr<const std::list<Cpim::Header> > mimeHeaders;
-  std::shared_ptr<const std::list<Cpim::Header> > messageHeaders;
-  std::string content;
+  shared_ptr<const list<Cpim::Header> > mimeHeaders;
+  shared_ptr<const list<Cpim::Header> > messageHeaders;
+  string content;
 };
 
 Cpim::Message::Message () : Object(new Cpim::MessagePrivate) {}
 
-std::shared_ptr<const std::list<Cpim::Header> > Cpim::Message::getMimeHeaders () const {
+shared_ptr<const list<Cpim::Header> > Cpim::Message::getMimeHeaders () const {
   L_PRIV(const Message);
   return _->mimeHeaders;
 }
 
-bool Cpim::Message::setMimeHeaders (const std::shared_ptr<std::list<Header> > &mimeHeaders) {}
+bool Cpim::Message::setMimeHeaders (const shared_ptr<list<Header> > &mimeHeaders) {}
 
-std::shared_ptr<const std::list<Cpim::Header> > Cpim::Message::getMessageHeaders () const {
+shared_ptr<const list<Cpim::Header> > Cpim::Message::getMessageHeaders () const {
   L_PRIV(const Message);
   return _->messageHeaders;
 }
 
-bool Cpim::Message::setMessageHeaders (const std::shared_ptr<std::list<Header> > &messageHeaders) {}
+bool Cpim::Message::setMessageHeaders (const shared_ptr<list<Header> > &messageHeaders) {}
 
-std::string Cpim::Message::getContent () const {
+string Cpim::Message::getContent () const {
   L_PRIV(const Message);
   return _->content;
 }
 
-bool Cpim::Message::setContent (const std::string &content) {}
+bool Cpim::Message::setContent (const string &content) {}

@@ -16,11 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <belr/parser-impl.cc>
+#include <belr/abnf.hh>
+#include <belr/grammarbuilder.hh>
 
 #include "cpim-grammar.h"
 
 #include "cpim-parser.h"
+
+using namespace std;
 
 using namespace Linphone;
 
@@ -28,8 +31,13 @@ using namespace Linphone;
 
 class Cpim::ParserPrivate : public ObjectPrivate {
 public:
-  ParserPrivate () = default;
-  ~ParserPrivate () = default;
+  shared_ptr<belr::Grammar> grammar;
 };
 
-Cpim::Parser::Parser () : Object(new ParserPrivate) {}
+Cpim::Parser::Parser () : Singleton(new ParserPrivate) {
+  L_PRIV(Parser);
+  _->grammar = belr::ABNFGrammarBuilder().createFromAbnf(
+      LinphonePrivate::Cpim::getGrammar(),
+      make_shared<belr::CoreRules>()
+    );
+}

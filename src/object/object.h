@@ -28,7 +28,6 @@ namespace Linphone {
 
   class ObjectPrivate {
   public:
-    ObjectPrivate () = default;
     virtual ~ObjectPrivate () = default;
 
   protected:

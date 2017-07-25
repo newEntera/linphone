@@ -19,8 +19,8 @@
 #ifndef _CPIM_PARSER_H_
 #define _CPIM_PARSER_H_
 
-#include "../object/object.h"
 #include "../object/singleton.h"
+#include "cpim-message.h"
 
 // =============================================================================
 
@@ -28,11 +28,10 @@ namespace Linphone {
   namespace Cpim {
     class ParserPrivate;
 
-    class Parser :
-      public Object,
-      public Singleton<Parser> {
+    class Parser : public Singleton<Parser> {
     public:
-      ~Parser () = default;
+      std::shared_ptr<Message> parseMessage (const std::string &input);
+      std::shared_ptr<Header> parseHeader (const std::string &input);
 
     private:
       Parser ();

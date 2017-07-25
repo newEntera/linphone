@@ -19,22 +19,24 @@
 #ifndef _SINGLETON_H_
 #define _SINGLETON_H_
 
-#include "../utils/general.h"
+#include "object.h"
 
 // =============================================================================
 
 namespace Linphone {
   template<class T>
-  class Singleton {
+  class Singleton : public Object {
   public:
-    Singleton () = default;
-    ~Singleton () = default;
-
-    static T *getInstance () {
+    static Singleton<T> *getInstance () {
       if (!mInstance)
-        mInstance = new T();
+        mInstance = new Singleton<T>();
       return mInstance;
     }
+
+  protected:
+    explicit Singleton (ObjectPrivate *objectPrivate) : Object(objectPrivate) {}
+
+    virtual ~Singleton () = default;
 
   private:
     static T *mInstance;
