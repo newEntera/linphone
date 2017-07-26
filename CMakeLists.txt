@@ -20,7 +20,8 @@
 #
 ############################################################################
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.1)
+
 project(linphone VERSION 3.12.0 LANGUAGES C CXX)
 
 
